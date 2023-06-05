@@ -4,9 +4,9 @@ const sharp = require("sharp");
 
 const convert = async (inputPath, outputDir) => {
   const obj = path.parse(inputPath);
-  const outputPath = path.join(outputDir, `${obj.name}.jpg`);
+  const outputPath = path.join(outputDir, `${obj.name}.avif`);
   try {
-    await sharp(inputPath).jpeg().toFile(outputPath);
+    await sharp(inputPath).toFormat("avif").toFile(outputPath);
   } catch (err) {
     console.error(err);
   }
