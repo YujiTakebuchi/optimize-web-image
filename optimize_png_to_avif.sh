@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ffmpeg -i src/test.png dist/test.avif
+ffmpeg -i src/test-image-ffmpeg.png dist/test-image-ffmpeg.avif
