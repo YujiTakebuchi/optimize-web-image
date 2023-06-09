@@ -7,6 +7,7 @@ specifiers:
   autoprefixer: 10.4.14
   eslint: 8.42.0
   eslint-config-next: 13.4.4
+  jotai: ^2.1.1
   next: 13.4.4
   postcss: 8.4.24
   react: 18.2.0
@@ -21,6 +22,7 @@ dependencies:
   autoprefixer: 10.4.14_postcss@8.4.24
   eslint: 8.42.0
   eslint-config-next: 13.4.4_tizxnkcvjrb4cldxgwq5h3lj5u
+  jotai: 2.1.1_react@18.2.0
   next: 13.4.4_biqbaboplfbrettd7655fr4n2y
   postcss: 8.4.24
   react: 18.2.0
@@ -1695,6 +1697,18 @@ packages:
   /jiti/1.18.2:
     resolution: {integrity: sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==}
     hasBin: true
+    dev: false
+
+  /jotai/2.1.1_react@18.2.0:
+    resolution: {integrity: sha512-LaaiuSaq+6XkwkrCtCkczyFVZOXe0dfjAFN4DVMsSZSRv/A/4xuLHnlpHMEDqvngjWYBotTIrnQ7OogMkUE6wA==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /js-tokens/4.0.0:
