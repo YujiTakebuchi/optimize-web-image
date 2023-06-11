@@ -10,7 +10,9 @@ export const FileListInput: React.FC = () => {
     console.log(fileList);
   }, [fileList]);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (
+    e
+  ) => {
     const enteredFileListObject = e.currentTarget.files;
     const enteredFileListObjectLength = enteredFileListObject?.length;
     if (!enteredFileListObjectLength) return;
@@ -19,6 +21,16 @@ export const FileListInput: React.FC = () => {
       .map((_, idx) => enteredFileListObject[idx]);
     console.log(enteredFileList);
     console.log(typeof enteredFileList);
+
+    fetch("/api/", {
+      method: "GET",
+      headers: {},
+    }).then((res) => {
+      const resultJSON = JSON.stringify(res);
+      console.log(res);
+      console.log(resultJSON);
+    });
+
     setFileList(enteredFileList);
   };
 
