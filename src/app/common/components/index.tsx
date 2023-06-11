@@ -31,6 +31,18 @@ export const FileListInput: React.FC = () => {
       console.log(resultJSON);
     });
 
+    enteredFileList.map((fl) => {
+      fetch("/api/", {
+        method: "POST",
+        // headers: { "Content-Type": "multipart/form-data" },
+        body: fl,
+      }).then((res) => {
+        const resultJSON = JSON.stringify(res);
+        console.log(res);
+        console.log(resultJSON);
+      });
+    });
+
     setFileList(enteredFileList);
   };
 

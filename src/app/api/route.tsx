@@ -14,16 +14,24 @@ export const GET = async (request: Request) => {
   return respnse;
 };
 
-export const POST = async (inputFile: File) => {
+export const POST = async (req: Request) => {
+  const headersList = headers();
+  const contentType = headersList.get("Content-Type");
+  console.log(headersList);
+  console.log(contentType);
+
   // const obj = path.parse(inputPath);
   // const outputPath = path.join(outputDir, `${obj.name}.avif`);
-  const convertedFile = await sharp()
-    .composite([
-      {
-        input: inputFile,
-        blend: "dest-in",
-      },
-    ])
-    .png();
-  console.log(convertedFile);
+  console.log(req.body);
+
+  if (!req.body) return;
+  const responseFile: ReadableStream<any> = req.body;
+  // return req.json().then((bd) => {
+  console.log(JSON.stringify(req.body));
+
+  const response: ResponseInit = new Response(responseFile, {
+    status: 200,
+  });
+  return response;
+  // });
 };
