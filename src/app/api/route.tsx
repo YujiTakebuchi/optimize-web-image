@@ -19,15 +19,26 @@ export const POST = async (req: Request) => {
   const contentType = headersList.get("Content-Type");
   console.log(headersList);
   console.log(contentType);
+  console.log("req");
+  console.log(req);
+  console.log("req.body");
+  console.log(req.body);
 
   // const obj = path.parse(inputPath);
   // const outputPath = path.join(outputDir, `${obj.name}.avif`);
-  console.log(req.body);
+  // console.log("req.blob()");
+  // console.log(req.blob());
+  // console.log("req.formData()");
+  // console.log(req.formData());
 
   if (!req.body) return;
   const responseFile: ReadableStream<any> = req.body;
   // return req.json().then((bd) => {
   console.log(JSON.stringify(req.body));
+  // return req.formData().then((data) => {
+  //   console.log("data");
+  //   console.log(data);
+  // });
 
   const response: ResponseInit = new Response(responseFile, {
     status: 200,
