@@ -17,32 +17,36 @@ export const GET = async (request: Request) => {
 export const POST = async (req: Request) => {
   const headersList = headers();
   const contentType = headersList.get("Content-Type");
-  console.log(headersList);
-  console.log(contentType);
-  console.log("req");
-  console.log(req);
-  console.log("req.body");
-  console.log(req.body);
+  // console.log(headersList);
+  // console.log(contentType);
+  // console.log("req");
+  // console.log(req);
+  // console.log("req.body");
+  // console.log(req.body);
+  return req.formData().then((data) => {
+    console.log(data);
+    console.log(data.get("file"));
+    const file = data.get("file");
 
-  // const obj = path.parse(inputPath);
-  // const outputPath = path.join(outputDir, `${obj.name}.avif`);
-  // console.log("req.blob()");
-  // console.log(req.blob());
-  // console.log("req.formData()");
-  // console.log(req.formData());
+    // const obj = path.parse(inputPath);
+    // const outputPath = path.join(outputDir, `${obj.name}.avif`);
+    // console.log("req.blob()");
+    // console.log(req.blob());
+    // console.log("req.formData()");
+    // console.log(req.formData());
 
-  if (!req.body) return;
-  const responseFile: ReadableStream<any> = req.body;
-  // return req.json().then((bd) => {
-  console.log(JSON.stringify(req.body));
-  // return req.formData().then((data) => {
-  //   console.log("data");
-  //   console.log(data);
-  // });
+    if (!req.body) return;
+    const responseFile: ReadableStream<any> = req.body;
+    // return req.json().then((bd) => {
+    console.log(JSON.stringify(req.body));
+    // return req.formData().then((data) => {
+    //   console.log("data");
+    //   console.log(data);
+    // });
 
-  const response: ResponseInit = new Response(responseFile, {
-    status: 200,
+    const response: ResponseInit = new Response(data, {
+      status: 200,
+    });
+    return response;
   });
-  return response;
-  // });
 };

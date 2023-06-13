@@ -34,18 +34,21 @@ export const FileListInput: React.FC = () => {
     enteredFileList.map((fl) => {
       const formData: FormData = new FormData();
       formData.append("file", fl);
+      console.log(formData);
+      console.log(formData.get("file"));
+
       fetch("/api/", {
         method: "POST",
-        headers: {
-          "Content-Type":
-            "multipart/form-data; boundary=----WebKitFormBoundaryxxxxyz",
-        },
         body: formData,
-      }).then((res) => {
-        const resultJSON = JSON.stringify(res);
-        console.log(res);
-        console.log(resultJSON);
-      });
+      })
+        .then((res) => {
+          return res.formData();
+        })
+        .then((fd) => {
+          console.log("server response");
+          console.log(fd);
+          console.log(fd.get("file"));
+        });
     });
 
     setFileList(enteredFileList);
