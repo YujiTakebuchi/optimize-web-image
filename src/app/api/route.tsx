@@ -15,17 +15,11 @@ export const GET = async (request: Request) => {
 };
 
 export const POST = async (req: Request) => {
-  const headersList = headers();
-  const contentType = headersList.get("Content-Type");
   return req.formData().then((data) => {
     console.log(data);
     console.log(data.get("file"));
-    const file = data.get("file");
 
     if (!req.body) return;
-    const responseFile: ReadableStream<any> = req.body;
-    console.log(JSON.stringify(req.body));
-
     const response: ResponseInit = new Response(data, {
       status: 200,
     });
