@@ -19,7 +19,6 @@ export const POST = async (req: Request) => {
     console.log(data);
     console.log(data.get("file"));
 
-    if (!req.body) return;
     const response: ResponseInit = new Response(data, {
       status: 200,
     });
