@@ -8,6 +8,7 @@ const convert = async (input: ArrayBuffer | null) => {
   // const outputPath = path.join(outputDir, `${obj.name}.avif`);
   const bufferData = await sharp(input).toFormat("avif").toBuffer();
   console.log(bufferData);
+  return bufferData;
 };
 
 export const GET = async (request: Request) => {
@@ -27,13 +28,27 @@ export const POST = async (req: Request) => {
     console.log(data.get("file"));
     const file = data.get("file") as File;
     if (!file) return;
-    const arrayBuffer = file.arrayBuffer().then((abData) => {
-      convert(abData);
-    });
+    // const arrayBuffer = file.arrayBuffer().then((abData) => {
+    return file
+      .arrayBuffer()
+      .then((abData) => {
+        const avifBuffer = convert(abData);
+        console.log(avifBuffer);
 
-    const response: ResponseInit = new Response(data, {
-      status: 200,
-    });
-    return response;
+        // return abData;
+        const response: ResponseInit = new Response(abData, {
+          status: 200,
+        });
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+        throw new Error("This is not file");
+      });
+    //   const response: ResponseInit = new Response(data, {
+    //     status: 200,
+    //   });
+    //   return response;
+    // });
   });
 };
