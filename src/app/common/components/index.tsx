@@ -10,6 +10,19 @@ export const FileListInput: React.FC = () => {
     console.log(fileList);
   }, [fileList]);
 
+  const convertUint8ArrayToBlob = (
+    ua: Uint8Array,
+    option: { mimeType: string }
+  ) => {
+    const blob = new Blob([ua.buffer], { type: option.mimeType });
+    return blob;
+  };
+
+  const convertBlobToFile = (blob: Blob, fileName: string) => {
+    const file = new File([blob], fileName);
+    return file;
+  };
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (
     e
   ) => {
@@ -48,6 +61,13 @@ export const FileListInput: React.FC = () => {
         .then((reader) => {
           reader?.read().then(({ value }) => {
             console.log(value);
+            if (!value) throw new Error("Response value is undifined!!!");
+            const blobData = convertUint8ArrayToBlob(value, {
+              mimeType: "image/avif",
+            });
+            console.log(blobData);
+            const fileData = convertBlobToFile(blobData, "test.avif");
+            console.log(fileData);
           });
         });
     });
