@@ -2,10 +2,11 @@
 
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import { optimizeFileListAtom } from "./atom";
+import { optimizeFileListAtom, optimizedFileDownload } from "./atom";
 
 export const FileListInput: React.FC = () => {
   const [fileList, setFileList] = useAtom(optimizeFileListAtom);
+  const [fileDownload, setFileDownload] = useAtom(optimizedFileDownload);
   useEffect(() => {
     console.log(fileList);
   }, [fileList]);
@@ -68,6 +69,7 @@ export const FileListInput: React.FC = () => {
             console.log(blobData);
             const fileData = convertBlobToFile(blobData, "test.avif");
             console.log(fileData);
+            setFileDownload(fileData);
           });
         });
     });
@@ -76,4 +78,17 @@ export const FileListInput: React.FC = () => {
   };
 
   return <input type="file" multiple onChange={handleChange} />;
+};
+
+export const FileDownloadButton: React.FC = () => {
+  // TODO: ファイルをリストで扱えるように
+  const [fileDownload, setFileDownload] = useAtom(optimizedFileDownload);
+  if (!fileDownload) return <></>;
+  const url = URL.createObjectURL(fileDownload);
+  return (
+    // TODO: ファイル名を動的に
+    <a href={url} download={"download.avif"}>
+      download AVIF!
+    </a>
+  );
 };
