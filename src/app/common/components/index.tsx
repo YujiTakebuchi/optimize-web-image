@@ -42,12 +42,13 @@ export const FileListInput: React.FC = () => {
         body: formData,
       })
         .then((res) => {
-          return res.formData();
+          console.log(res);
+          return res.body?.getReader();
         })
-        .then((fd) => {
-          console.log("server response");
-          console.log(fd);
-          console.log(fd.get("file"));
+        .then((reader) => {
+          reader?.read().then(({ value }) => {
+            console.log(value);
+          });
         });
     });
 
