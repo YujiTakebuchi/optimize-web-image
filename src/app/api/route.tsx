@@ -3,6 +3,13 @@ const fs = require("fs").promises;
 const path = require("path");
 const sharp = require("sharp");
 
+export const runtime = "nodejs";
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const convert = async (input: ArrayBuffer | null) => {
   // const obj = path.parse(input);
   // const outputPath = path.join(outputDir, `${obj.name}.avif`);
